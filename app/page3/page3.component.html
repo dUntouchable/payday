@@ -1,0 +1,46 @@
+<div class="container">
+	<h2>Eligibility Check</h2>
+	<form class="form-horizontal" [formGroup]="elicheck" novalidate>
+		<fieldset class="scheduler-border">
+			<legend class="scheduler-border">Eligibility Check</legend>
+			<div class="form-group">
+				<label for="netSalary" class="control-label col-xs-2">Net Salary</label>
+				<div class="col-xs-10">
+					<input formControlName="net_salary" type="number" id="netSalary" required>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="totalEmi" class="control-label col-xs-2">Total EMIs</label>
+				<div class="col-xs-10">
+					<input formControlName="total_emi" type="number" id="totalEmi" required>
+				</div>
+			</div>
+		</fieldset>
+		<div class="form-group">
+			<div class="col-xs-offset-2 col-xs-10">
+				<button type="button" class="btn btn-primary" routerLink="page4" (click)=eligibilityCheck($event)>Next</button>
+			</div>
+		</div>
+	</form>
+	<p> net Salary is {{elicheck.get('net_salary').value }} </p>
+	<p> Total EMI {{elicheck.get('total_emi').value }} </p>
+	<p>Status {{elicheck.status | json}} </p>
+
+	<br>
+	<div class="bg-info p-a-1">
+		Selected Product is {{selectedId || 'None'}}
+  </div>
+	<table class="table table-xs table-bordered m-t-1">
+		<tr><th>Id</th><th>Name</th></tr>
+		<tr *ngFor="let item of getNameId()" [class.bg-info]="getSelected(item)">
+			<td (mouseover)="selectedId=item.name">{{item.id}}</td>
+			<td (mouseover)="selectedId=item.name">{{item.name}}</td>
+		</tr>
+	</table>
+	<br>
+	<div class="form-group">
+		<label>Name </label>
+		<input class="form-control" (input)="selectedId=$event.target.value"/>
+	</div>
+
+</div>
